@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Marrero's Tech - Soluciones Informáticas</title>
+    <!-- Favicon de computadora -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Reset optimizado para todos los dispositivos */
+        :root {
+            --primary-blue: #1a73e8;
+            --secondary-blue: #4285f4;
+            --light-blue: #e8f0fe;
+            --dark-blue: #0d47a1;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --gray-light: #f5f7fa;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --safe-area-inset-top: env(safe-area-inset-top);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-top: var(--safe-area-inset-top);
+            padding-bottom: var(--safe-area-inset-bottom);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        /* Preloader optimizado */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0d47a1 0%, #1a73e8 100%);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .preloader-content {
+            text-align: center;
+            color: white;
+            z-index: 100;
+            padding: 20px;
+        }
+
+        .preloader-content h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+        }
+
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .binary-digit {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Courier New', monospace;
+            font-size: clamp(14px, 2vw, 18px);
+            top: -20px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Header optimizado para iOS/Android */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: clamp(10px, 3vw, 20px) 5%;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: var(--primary-blue);
+        }
+
+        .logo h1 {
+            font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+            color: var(--dark-blue);
+        }
+
+        .logo span {
+            color: var(--primary-blue);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: clamp(15px, 2vw, 30px);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 0;
+            position: relative;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        nav a:hover, nav a:active {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: clamp(1.3rem, 4vw, 1.5rem);
+            color: var(--dark-blue);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Hero Section con fondo de Android IA */
+        .hero {
+            padding: clamp(120px, 20vw, 150px) 5% clamp(60px, 10vw, 100px);
+            background: 
+                linear-gradient(rgba(26, 115, 232, 0.85), rgba(13, 71, 161, 0.9)),
+                url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTIwMCA2MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgMzAwaDEyMDBWMzAwaC0xMjAweiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1vcGFjaXR5PSIwLjEiLz48Y2lyY2xlIGN4PSI0MDAiIGN5PSIyMDAiIHI9IjcwIiBmaWxsPSIjMDAwMDAwIiBmaWxsLW9wYWNpdHk9IjAuMSIvPjxjaXJjbGUgY3g9IjgwMCIgY3k9IjQwMCIgcj0iOTAiIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PHBhdGggZD0iTTMwMCAxNTBsMzAwIDMwMEw5MDAgMTUwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero h2 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            margin-bottom: clamp(15px, 3vw, 20px);
+            line-height: 1.2;
+            color: white;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: clamp(20px, 4vw, 30px);
+        }
+
+        /* Botón de WhatsApp flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: clamp(70px, 10vw, 90px);
+            right: clamp(15px, 3vw, 25px);
+            background-color: #25D366;
+            color: white;
+            width: clamp(50px, 10vw, 60px);
+            height: clamp(50px, 10vw, 60px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover, .whatsapp-float:active {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
+        /* Servicios optimizados */
+        .services {
+            padding: clamp(60px, 10vw, 100px) 5%;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: clamp(40px, 6vw, 60px);
+        }
+
+        .section-title h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: clamp(10px, 2vw, 15px);
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: clamp(0.95rem, 2vw, 1rem);
+            padding: 0 10px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(20px, 3vw, 30px);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: clamp(25px, 4vw, 40px) clamp(20px, 3vw, 30px);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border-top: 5px solid var(--primary-blue);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            color: var(--primary-blue);
+            margin-bottom: clamp(15px, 3vw, 20px);
+        }
+
+        .service-card h3 {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: clamp(10px, 2vw, 15px);
+        }
+
+        .service-card p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* Formulario optimizado */
+        .contact {
+            padding: clamp(60px, 10vw, 100px) 5%;
+            background-color: var(--gray-light);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(30px, 5vw, 50px);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            padding: clamp(20px, 3vw, 30px);
+        }
+
+        .contact-info h3 {
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            margin-bottom: clamp(15px, 3vw, 20px);
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: clamp(15px, 3vw, 20px);
+        }
+
+        .contact-detail i {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--primary-blue);
+            margin-right: clamp(10px, 2vw, 15px);
+            width: 30px;
+            flex-shrink: 0;
+        }
+
+        .contact-form {
+            background-color: var(--white);
+            padding: clamp(25px, 4vw, 40px);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: clamp(15px, 3vw, 20px);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: clamp(10px, 2vw, 12px) clamp(12px, 2vw, 15px);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            transition: var(--transition);
+            font-size: clamp(0.95rem, 2vw, 1rem);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+        }
+
+        select.form-control {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+            padding-right: 40px;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            margin-top: 5px;
+            display: none;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: clamp(12px, 3vw, 15px) clamp(20px, 4vw, 30px);
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .submit-btn:hover, .submit-btn:active {
+            background-color: var(--dark-blue);
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: clamp(12px, 3vw, 15px);
+            border-radius: 5px;
+            margin-top: clamp(15px, 3vw, 20px);
+            display: none;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* Footer optimizado */
+        footer {
+            background-color: var(--dark-blue);
+            color: white;
+            padding: clamp(40px, 8vw, 70px) 5% clamp(20px, 5vw, 30px);
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: clamp(25px, 4vw, 40px);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo h3 {
+            color: white;
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            margin-bottom: clamp(10px, 2vw, 15px);
+        }
+
+        .footer-logo span {
+            color: var(--secondary-blue);
+        }
+
+        .footer-logo p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            opacity: 0.9;
+        }
+
+        .footer-links h4, .footer-services h4 {
+            color: white;
+            margin-bottom: clamp(15px, 3vw, 20px);
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+        }
+
+        .footer-links ul, .footer-services ul {
+            list-style: none;
+        }
+
+        .footer-links li, .footer-services li {
+            margin-bottom: clamp(8px, 2vw, 10px);
+        }
+
+        .footer-links a, .footer-services a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .footer-links a:hover, .footer-services a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: clamp(20px, 4vw, 30px);
+            margin-top: clamp(25px, 5vw, 40px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+        }
+
+        /* Media Queries optimizadas */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                transition: var(--transition);
+                box-shadow: var(--shadow);
+                gap: 30px;
+                overflow-y: auto;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            .hero {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 100px 5% 50px;
+            }
+            
+            .services-grid {
+                gap: 20px;
+            }
+            
+            .contact-container {
+                gap: 25px;
+            }
+        }
+
+        /* Soporte para iOS específico */
+        @supports (-webkit-touch-callout: none) {
+            .hero {
+                background-attachment: scroll;
+            }
+            
+            .form-control, .submit-btn {
+                font-size: 16px; /* Previene zoom en iOS */
+            }
+        }
+
+        /* Mejoras de accesibilidad */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader con lluvia binaria -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <h2>Marrero's Tech</h2>
+            <p>Cargando soluciones tecnológicas...</p>
+        </div>
+        <div class="binary-rain" id="binaryRain"></div>
+    </div>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/5350756522?text=Hola%20Marrero's%20Tech,%20me%20interesan%20sus%20servicios" 
+       class="whatsapp-float" 
+       target="_blank"
+       aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header y Navegación -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <h1>Marrero's <span>Tech</span></h1>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú de navegación">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="mainNav">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección Hero -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h2>Soluciones Tecnológicas Profesionales para tu Negocio</h2>
+            <p>Ofrecemos servicios integrales de tecnología para empresas y MYPIMES. Desde instalación de cámaras de seguridad hasta desarrollo web y soporte técnico especializado.</p>
+        </div>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section class="services" id="servicios">
+        <div class="section-title">
+            <h2>Nuestros Servicios</h2>
+            <p>Ofrecemos soluciones tecnológicas integrales para potenciar tu negocio</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Montaje de Cámaras</h3>
+                <p>Instalación y configuración profesional de sistemas de videovigilancia para tu negocio o residencia. Soluciones adaptadas a tus necesidades.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Creación de Sitios Web</h3>
+                <p>Desarrollo de sitios web profesionales para empresas y MYPIMES. Diseños responsivos, optimizados para SEO y fáciles de administrar.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>Servicios Técnicos para PC</h3>
+                <p>Mantenimiento, reparación y optimización de equipos informáticos. Soluciones rápidas y efectivas para problemas técnicos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section class="contact" id="contacto">
+        <div class="section-title">
+            <h2>Contáctanos</h2>
+            <p>Estamos listos para ayudarte con tus proyectos tecnológicos</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <div class="contact-detail">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Teléfono / WhatsApp</h4>
+                        <p>+53 50756522</p>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>yerimarrero52@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Ubicación</h4>
+                        <p>Cuba - Servicios en todo el país</p>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Horario de Atención</h4>
+                        <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+                        <p>Sábados: 9:00 AM - 1:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Envíanos un Mensaje</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo *</label>
+                        <input type="text" id="name" class="form-control" placeholder="Tu nombre" required>
+                        <div class="error-message" id="nameError">Por favor ingresa tu nombre</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Teléfono *</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Tu teléfono" required>
+                        <div class="error-message" id="phoneError">Por favor ingresa un teléfono válido</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Tu email (opcional)">
+                        <div class="error-message" id="emailError">Por favor ingresa un email válido</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service">Servicio de Interés *</label>
+                        <select id="service" class="form-control" required>
+                            <option value="">Selecciona un servicio</option>
+                            <option value="Montaje de Cámaras">Montaje de Cámaras</option>
+                            <option value="Creación de Sitios Web">Creación de Sitios Web</option>
+                            <option value="Servicios Técnicos para PC">Servicios Técnicos para PC</option>
+                            <option value="Varios Servicios">Varios Servicios</option>
+                        </select>
+                        <div class="error-message" id="serviceError">Por favor selecciona un servicio</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensaje *</label>
+                        <textarea id="message" class="form-control" rows="5" placeholder="Describe tu proyecto o consulta" required></textarea>
+                        <div class="error-message" id="messageError">Por favor ingresa un mensaje</div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Enviar por WhatsApp</button>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i> ¡Redirigiendo a WhatsApp para enviar tu mensaje!
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <h3>Marrero's <span>Tech</span></h3>
+                <p>Soluciones tecnológicas profesionales para empresas y MYPIMES en Cuba.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-services">
+                <h4>Nuestros Servicios</h4>
+                <ul>
+                    <li><a href="#servicios">Montaje de Cámaras</a></li>
+                    <li><a href="#servicios">Creación de Sitios Web</a></li>
+                    <li><a href="#servicios">Servicios Técnicos para PC</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; <span id="currentYear"></span> Marrero's Tech. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript optimizado -->
+    <script>
+        // Detectar dispositivo y optimizaciones
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isAndroid = /Android/.test(navigator.userAgent);
+        
+        // Preloader y lluvia binaria
+        document.addEventListener('DOMContentLoaded', function() {
+            // Crear lluvia binaria
+            const binaryRain = document.getElementById('binaryRain');
+            const binaryChars = ['0', '1'];
+            
+            function createBinaryDigit() {
+                const digit = document.createElement('div');
+                digit.className = 'binary-digit';
+                digit.textContent = binaryChars[Math.floor(Math.random() * binaryChars.length)];
+                digit.style.left = Math.random() * 100 + 'vw';
+                digit.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                digit.style.opacity = Math.random() * 0.5 + 0.3;
+                binaryRain.appendChild(digit);
+                
+                // Remover después de la animación
+                setTimeout(() => {
+                    digit.remove();
+                }, 5000);
+            }
+            
+            // Crear múltiples dígitos binarios
+            for (let i = 0; i < 30; i++) {
+                createBinaryDigit();
+            }
+            
+            // Continuar creando dígitos (menos en móviles para mejor rendimiento)
+            const interval = isAndroid || isIOS ? 200 : 100;
+            setInterval(createBinaryDigit, interval);
+            
+            // Ocultar preloader más rápido en móviles
+            const preloaderTime = isAndroid || isIOS ? 1500 : 2000;
+            setTimeout(() => {
+                document.getElementById('preloader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('preloader').style.display = 'none';
+                }, 300);
+            }, preloaderTime);
+            
+            // Año actual en el copyright
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Menú móvil optimizado
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+                
+                // Bloquear scroll cuando el menú está abierto
+                document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            // Cerrar menú al hacer clic en un enlace
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        document.body.style.overflow = '';
+                    }
+                    
+                    // Scroll suave para todos los dispositivos
+                    const targetId = this.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Validación del formulario optimizada
+            const contactForm = document.getElementById('contactForm');
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('phone');
+            const emailInput = document.getElementById('email');
+            const serviceInput = document.getElementById('service');
+            const messageInput = document.getElementById('message');
+            
+            const nameError = document.getElementById('nameError');
+            const phoneError = document.getElementById('phoneError');
+            const emailError = document.getElementById('emailError');
+            const serviceError = document.getElementById('serviceError');
+            const messageError = document.getElementById('messageError');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Expresiones regulares para validación
+            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            // Funciones de validación optimizadas
+            function validateName() {
+                if (nameInput.value.trim() === '') {
+                    nameError.style.display = 'block';
+                    nameInput.style.borderColor = '#e74c3c';
+                    return false;
+                } else {
+                    nameError.style.display = 'none';
+                    nameInput.style.borderColor = '#ddd';
+                    return true;
+                }
+            }
+            
+            function validatePhone() {
+                const phone = phoneInput.value.trim();
+                if (!phoneRegex.test(phone)) {
+                    phoneError.style.display = 'block';
+                    phoneInput.style.borderColor = '#e74c3c';
+                    return false;
+                } else {
+                    phoneError.style.display = 'none';
+                    phoneInput.style.borderColor = '#ddd';
+                    return true;
+                }
+            }
+            
+            function validateEmail() {
+                const email = emailInput.value.trim();
+                if (email !== '' && !emailRegex.test(email)) {
+                    emailError.style.display = 'block';
+                    emailInput.style.borderColor = '#e74c3c';
+                    return false;
+                } else {
+                    emailError.style.display = 'none';
+                    emailInput.style.borderColor = '#ddd';
+                    return true;
+                }
+            }
+            
+            function validateService() {
+                if (serviceInput.value === '') {
+                    serviceError.style.display = 'block';
+                    serviceInput.style.borderColor = '#e74c3c';
+                    return false;
+                } else {
+                    serviceError.style.display = 'none';
+                    serviceInput.style.borderColor = '#ddd';
+                    return true;
+                }
+            }
+            
+            function validateMessage() {
+                if (messageInput.value.trim() === '') {
+                    messageError.style.display = 'block';
+                    messageInput.style.borderColor = '#e74c3c';
+                    return false;
+                } else {
+                    messageError.style.display = 'none';
+                    messageInput.style.borderColor = '#ddd';
+                    return true;
+                }
+            }
+            
+            // Eventos de validación en tiempo real
+            nameInput.addEventListener('input', validateName);
+            phoneInput.addEventListener('input', validatePhone);
+            emailInput.addEventListener('input', validateEmail);
+            serviceInput.addEventListener('change', validateService);
+            messageInput.addEventListener('input', validateMessage);
+            
+            // Envío del formulario a WhatsApp
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validar todos los campos
+                const isNameValid = validateName();
+                const isPhoneValid = validatePhone();
+                const isEmailValid = validateEmail();
+                const isServiceValid = validateService();
+                const isMessageValid = validateMessage();
+                
+                if (isNameValid && isPhoneValid && isEmailValid && isServiceValid && isMessageValid) {
+                    // Obtener datos del formulario
+                    const formData = {
+                        name: nameInput.value.trim(),
+                        phone: phoneInput.value.trim(),
+                        email: emailInput.value.trim(),
+                        service: serviceInput.value,
+                        message: messageInput.value.trim()
+                    };
+                    
+                    // Crear mensaje para WhatsApp
+                    const whatsappMessage = `*NUEVO CONTACTO - Marrero's Tech*%0A%0A` +
+                        `*Nombre:* ${formData.name}%0A` +
+                        `*Teléfono:* ${formData.phone}%0A` +
+                        (formData.email ? `*Email:* ${formData.email}%0A` : '') +
+                        `*Servicio Interés:* ${formData.service}%0A` +
+                        `*Mensaje:*%0A${formData.message}%0A%0A` +
+                        `*Enviado desde el sitio web de Marrero's Tech*`;
+                    
+                    // Mostrar mensaje de éxito
+                    successMessage.style.display = 'block';
+                    
+                    // Limpiar formulario
+                    contactForm.reset();
+                    
+                    // Redirigir a WhatsApp después de 1 segundo
+                    setTimeout(() => {
+                        window.open(`https://wa.me/5350756522?text=${whatsappMessage}`, '_blank');
+                        
+                        // Ocultar mensaje de éxito después de 3 segundos
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                        }, 3000);
+                    }, 1000);
+                } else {
+                    // Enfocar el primer campo con error
+                    if (!isNameValid) nameInput.focus();
+                    else if (!isPhoneValid) phoneInput.focus();
+                    else if (!isEmailValid) emailInput.focus();
+                    else if (!isServiceValid) serviceInput.focus();
+                    else if (!isMessageValid) messageInput.focus();
+                    
+                    // Vibrar en dispositivos móviles compatibles
+                    if (navigator.vibrate) {
+                        navigator.vibrate(200);
+                    }
+                }
+            });
+            
+            // Efecto de scroll en el header optimizado
+            let lastScroll = 0;
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    header.style.padding = '10px 5%';
+                    header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+                    
+                    // Ocultar/mostrar header en scroll móvil
+                    if (window.innerWidth <= 768) {
+                        if (currentScroll > lastScroll && currentScroll > 200) {
+                            header.style.transform = 'translateY(-100%)';
+                        } else {
+                            header.style.transform = 'translateY(0)';
+                        }
+                    }
+                } else {
+                    header.style.padding = '20px 5%';
+                    header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
+                    header.style.transform = 'translateY(0)';
+                }
+                
+                lastScroll = currentScroll;
+            });
+            
+            // Optimización para iOS
+            if (isIOS) {
+                // Fix para altura en iOS
+                function setVh() {
+                    let vh = window.innerHeight * 0.01;
+                    document.documentElement.style.setProperty('--vh', `${vh}px`);
+                }
+                setVh();
+                window.addEventListener('resize', setVh);
+                
+                // Fix para inputs en iOS
+                document.querySelectorAll('input, textarea').forEach(el => {
+                    el.addEventListener('focus', function() {
+                        window.setTimeout(() => {
+                            this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 300);
+                    });
+                });
+            }
+            
+            // Optimización para Android
+            if (isAndroid) {
+                // Mejorar rendimiento de animaciones
+                document.querySelectorAll('.service-card, .whatsapp-float').forEach(el => {
+                    el.style.willChange = 'transform';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
